@@ -49,6 +49,8 @@ The flow is: edit a branch → preview → pull request → checks → merge int
 
 `.github/workflows/pages.yml` checks pull requests and `main`. After checks pass on `main`, it uploads only `public/` and deploys using GitHub's official Pages actions. A manual run from the Actions tab can redeploy `main`. Pull requests do not publish or get their own hosted preview. Source files, skills and documentation stay out of the website artifact.
 
+During packaging, `scripts/version_assets.py` adds content-based versions to local stylesheet, image and script links in HTML. This makes browsers fetch updated assets instead of mixing a new page with cached styles. It runs automatically; ordinary edits and local previews need no extra command.
+
 Hosting configuration for this repository:
 
 1. The repository is public for GitHub Free Pages; `main` is the production branch.
