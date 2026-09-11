@@ -9,6 +9,12 @@ This is the real, ongoing portfolio website for Eoin, a film editor working in I
 - Deployment: `.github/workflows/pages.yml`
 - Workflow guidance: `.agents/skills/site-workflow/SKILL.md`
 
+## Shared instructions across agents
+
+This file is the canonical project guide for every coding agent. Codex reads it directly; Claude Code loads it through the root `CLAUDE.md` import. Other agents should read this file explicitly if they do not discover it automatically. The linked workflow skill is ordinary Markdown and can be read by any agent; native skill support is optional.
+
+Keep project rules here and detailed workflow steps in `.agents/skills/site-workflow/SKILL.md`. Keep `CLAUDE.md` as a thin import so instructions stay consistent. Do not import `CLAUDE.md` back into this file or duplicate the shared workflow into tool-specific files.
+
 ## Handle setup and updates for the user
 
 Read the workflow skill for local setup, editing, review, publishing and rollback. Treat plain-language requests as sufficient; the user should not have to remember Git commands or skill names. Explain the result and any necessary user action briefly.
