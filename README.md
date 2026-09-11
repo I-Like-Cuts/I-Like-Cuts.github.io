@@ -11,13 +11,21 @@ The website starts with plain HTML and CSS; no Node dependencies or build step a
 
 ## Start with your agent
 
-Open or clone this repository in your coding agent and say:
+Use Claude Code, Codex, or another coding agent. For a first-time setup, paste:
 
-> Set up this website locally and show me a preview. Follow AGENTS.md.
+> Clone https://github.com/I-Like-Cuts/I-Like-Cuts.github.io if needed, read AGENTS.md and its linked workflow guide, and set up a local preview. Help me with any missing tools or sign-in. Do not publish until I ask.
 
 Then use everyday requests such as “Update my biography and show me”, “Publish these changes”, or “Undo the last published change”. The agent handles the commands, branches, checks and deployment. It should only need your help for signing in or for missing content and preferences.
 
-`AGENTS.md` supplies the project context and `.agents/skills/site-workflow/SKILL.md` supplies the detailed workflow. Agents that do not automatically load these files can be asked to read them. Previewing or editing does not publish changes; asking to publish authorizes the complete publishing workflow.
+`AGENTS.md` supplies the shared project context and `.agents/skills/site-workflow/SKILL.md` supplies the detailed workflow. Previewing or editing does not publish changes; asking to publish authorizes the complete publishing workflow.
+
+| Agent | How it gets the instructions |
+| --- | --- |
+| Claude Code | The root `CLAUDE.md` imports `AGENTS.md` automatically. No setup file needs to be created. |
+| Codex | Reads `AGENTS.md` and can discover the repository's `site-workflow` skill. |
+| Other coding agents | Ask them to read `AGENTS.md` and the linked workflow guide. |
+
+Shared instructions are maintained once, in `AGENTS.md`, with detailed procedures in the workflow guide. `CLAUDE.md` is only an adapter, not a second copy. See [Claude Code's import documentation](https://code.claude.com/docs/en/memory#agentsmd).
 
 ## Preview and check
 
@@ -30,9 +38,9 @@ python3 -m http.server 8000 --bind 127.0.0.1 --directory public
 
 Open <http://localhost:8000>. Stop the server with Ctrl+C. Edit `public/index.html` for text and `public/styles.css` for appearance. Refresh the browser to see changes. The check validates basic document structure and local asset paths; it is not a complete HTML or accessibility validator.
 
-## Ask Codex to help
+## Optional Codex skill shortcuts
 
-The repository includes `.agents/skills/site-workflow/SKILL.md`. Open this repository in Codex and use these prompts:
+Plain-language requests work across agents. If using Codex, the repository also includes these optional skill prompts:
 
 ```text
 $site-workflow preview the website
