@@ -15,7 +15,18 @@ Use Claude Code, Codex, or another coding agent. For a first-time setup, paste:
 
 > Clone https://github.com/I-Like-Cuts/I-Like-Cuts.github.io if needed, read AGENTS.md and its linked workflow guide, and set up a local preview. Help me with any missing tools or sign-in. Do not publish until I ask.
 
-Then use everyday requests such as “Update my biography and show me”, “Publish these changes”, or “Undo the last published change”. The agent handles the commands, branches, checks and deployment. It should only need your help for signing in or for missing content and preferences.
+## Your everyday workflow
+
+1. **Open the website folder** in Claude Code or your preferred agent.
+2. **Describe the change:** “Add this film, with this credit and Vimeo link.”
+3. **Review the local preview** and ask for adjustments until you are happy.
+4. **Say “Publish these changes.”** The agent checks the work, creates a pull request, merges after checks pass, and verifies the deployed website.
+5. **To roll back, say “Undo the last published change.”** The agent publishes a reversal through the same process.
+
+You provide the content, creative decisions and approval to publish. The agent handles Git and deployment, asking for help if sign-in, access or missing information blocks it. Editing and previewing do not publish changes.
+
+<details>
+<summary>Technical reference and agent configuration</summary>
 
 `AGENTS.md` supplies the shared project context and `.agents/skills/site-workflow/SKILL.md` supplies the detailed workflow. Previewing or editing does not publish changes; asking to publish authorizes the complete publishing workflow.
 
@@ -76,3 +87,5 @@ Hosting references: [Pages overview](https://docs.github.com/en/pages/getting-st
 ## Tomorrow's design session
 
 Replace the welcome page once the visual direction, selected work, accurate credits and Vimeo links are agreed. Eoin already has a paid Vimeo account; the initial setup does not require migrating video or introducing a CMS.
+
+</details>
