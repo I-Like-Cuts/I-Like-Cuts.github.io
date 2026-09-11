@@ -32,36 +32,44 @@ body {
 .credit { text-align: center; min-width: 0; }
 .portrait {
   display: block;
-  width: min(100%, 31rem);
+  width: min(100%, 36rem, 58svh);
   height: auto;
-  max-height: 58svh;
-  object-fit: contain;
+  aspect-ratio: 1;
+  object-fit: cover;
+  object-position: center 52%;
   margin: 0 auto;
   filter: grayscale(1);
-  -webkit-mask-image: radial-gradient(ellipse closest-side, #000 58%, transparent 100%);
-  mask-image: radial-gradient(ellipse closest-side, #000 58%, transparent 100%);
+  -webkit-mask-image: radial-gradient(circle closest-side, #000 20%, rgb(0 0 0 / 95%) 42%, rgb(0 0 0 / 65%) 62%, rgb(0 0 0 / 25%) 80%, transparent 100%);
+  mask-image: radial-gradient(circle closest-side, #000 20%, rgb(0 0 0 / 95%) 42%, rgb(0 0 0 / 65%) 62%, rgb(0 0 0 / 25%) 80%, transparent 100%);
 }
 
 h1 {
-  margin: 0.5rem 0 0;
-  font-size: clamp(4rem, 12vw, 11rem);
+  margin: 1.5rem 0 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(3.5rem, 8.5vw, 8rem);
   line-height: 0.95;
-  letter-spacing: -0.065em;
-  font-weight: 800;
+  letter-spacing: 0.035em;
+  font-weight: 700;
+  font-style: italic;
+  text-transform: uppercase;
+  color: #e9e5dc;
+  text-shadow: 2px 3px 0 #494949, 5px 7px 0 #191919;
 }
 h1 span {
   display: block;
-  margin-bottom: 0.7rem;
-  font-size: clamp(1.3rem, 3.7vw, 3.5rem);
+  margin-bottom: 1.2rem;
+  font-size: clamp(0.75rem, 1.3vw, 1.1rem);
   font-weight: 400;
-  letter-spacing: -0.035em;
+  font-style: normal;
+  letter-spacing: 0.35em;
+  text-shadow: none;
 }
 
 @media (max-width: 600px) {
   .page { grid-template-columns: minmax(0, 1fr); gap: 2rem; }
   .credit { grid-row: 1; }
-  .portrait { width: min(100%, 24rem); max-height: 52svh; }
-  h1 { font-size: clamp(3rem, 16vw, 6rem); }
+  .portrait { width: min(100%, 24rem, 52svh); }
+  h1 { font-size: clamp(2rem, 10vw, 3.75rem); }
   .editor { justify-self: start; padding-bottom: 0; }
   .intro { margin-top: 0.75rem; }
   .location { margin-top: 0.75rem; }
