@@ -1,0 +1,67 @@
+name: Website
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    name: Check website
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Check HTML structure and local assets
+        run: python3 scripts/check_site.py
+
+  package:
+    name: Package website
+    needs: check
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/configure-pages@v5
+      - name: Record published commit
+        run: printf '%s\n' "$GITHUB_SHA" > public/version.txt
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: public
+
+  deploy:
+    name: Deploy website
+    needs: package
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    concurrency:
+      group: github-pages
+      cancel-in-progress: false
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Publish to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+      - name: Verify live deployment
+        env:
+          SITE_URL: ${{ steps.deployment.outputs.page_url }}
+        run: |
+          for attempt in {1..12}; do
+            live_commit=$(curl --fail --silent --show-error "${SITE_URL}version.txt?commit=${GITHUB_SHA}") || live_commit=""
+            if [ "$live_commit" = "$GITHUB_SHA" ]; then
+              curl --fail --silent --show-error "$SITE_URL" > /dev/null
+              echo "Verified live deployment of $GITHUB_SHA at $SITE_URL"
+              exit 0
+            fi
+            sleep 5
+          done
+          echo "The live website did not return the expected commit."
+          exit 1
